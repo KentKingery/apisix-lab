@@ -1,0 +1,29 @@
+services:
+  apisix:
+    image: apisix-lab
+    restart: always
+    environment:
+      APISIX_STAND_ALONE: true
+    ports:
+      - 9080:9080
+
+  db:
+    image: postgres:16.3-alpine3.20
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: p@ssw0rd
+      POSTGRES_DB: products
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+ 
+  adminer:
+    image: adminer:4.8.1-standalone
+    restart: always
+    ports:
+      - 8080:8080
+ 
+volumes:
+  pgdata:
